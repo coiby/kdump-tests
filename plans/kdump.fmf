@@ -34,5 +34,17 @@ provision:
      how: virtual
      image: fedora:40
 
+prepare:
+  - name: permit_root
+    how: shell
+    script:
+      - dnf remove cloud-init -yq
+      - echo PermitRootLogin yes >> /etc/ssh/sshd_config
+      - systemctl restart sshd
+      - echo root:kdump | chpasswd
+    where:
+      - client
+      - server
+
 execute:
     how: tmt
