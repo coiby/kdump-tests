@@ -1,3 +1,5 @@
 summary: Dump vmcore to an NFS server
 test: ./test.sh
 framework: beakerlib
+restart-on-exit-code: 79
+restart-max-count: 5
